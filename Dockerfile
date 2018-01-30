@@ -11,6 +11,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/
 
-COPY main /usr/local/
+COPY addressinfer /usr/local/
 
-CMD ["/usr/local/main"]
+CMD ["/usr/local/addressinfer"]
