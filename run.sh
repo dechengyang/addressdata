@@ -10,11 +10,11 @@ cp -r templates docker/
 
 cd docker/
 
-docker build --network host -t luozhouyang/address-infer:0.1 .
+docker build --network host -t allenluo/address-infer:0.1 .
 
 rm addressinfer
 
 rm -rf templates
 
-docker run -ti --name address-infer -p 8080:8080 luozhouyang/address-infer:0.1
+docker run -ti --name address-infer -p 8080:8080 allenluo/address-infer:0.1
 
