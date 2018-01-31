@@ -9,8 +9,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && pip3 install jieba3k \
     && apt-get remove python-pip3 \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/
+    && rm -rf /var/lib/apt/lists/ \
+    && mkdir -p /home/templates
 
-COPY addressinfer /usr/local/
+COPY addressinfer /home
+COPY templates /home/templates
 
-CMD ["/usr/local/addressinfer"]
+EXPOSE 8080
+
+CMD ["/home/addressinfer"]
