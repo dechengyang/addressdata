@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-LABEL maintainer "stupidme.me.lzy@gmail.com"
+LABEL maintainer="stupidme.me.lzy@gmail.com"
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     python3.5 python3-pip \
