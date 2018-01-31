@@ -4,11 +4,17 @@ go build main.go
 
 mv main addressinfer
 
-docker rmi luozhouyang/address-infer:0.1
+mv addressinfer docker/
 
-docker build -t luozhouyang/address-infer:0.1 .
+cp -r templates docker/
+
+cd docker/
+
+docker build --network host -t luozhouyang/address-infer:0.1 .
 
 rm addressinfer
+
+rm -rf templates
 
 docker run -ti --name address-infer -p 8080:8080 luozhouyang/address-infer:0.1
 
