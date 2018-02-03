@@ -6,8 +6,12 @@ import (
 )
 
 func postHandler(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("statics/templates/index.html")
-	t.Execute(w, nil)
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("statics/templates/index.html")
+		t.Execute(w, nil)
+		return
+	}
+	http.Redirect(w, r, "/404", 301)
 }
 
 func resultHandler(w http.ResponseWriter, r *http.Request) {
@@ -21,18 +25,31 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 	//	panic(err)
 	//}
 	//w.Write([]byte(fh.Filename))
-	t, _ := template.ParseFiles("statics/templates/result.html")
-	t.Execute(w, nil)
-
+	if r.Method == "POST" {
+		t, _ := template.ParseFiles("statics/templates/result.html")
+		t.Execute(w, nil)
+		return
+	}
+	http.Redirect(w, r, "/404", 301)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "/post", 301)
+	if r.Method == "GET" {
+		http.Redirect(w, r, "/post", 301)
+		return
+	}
+	http.Redirect(w, r, "/404", 301)
+}
+
+func handler404(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("statics/templates/404.html")
+	t.Execute(w, nil)
 }
 
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/post", postHandler)
 	http.HandleFunc("/result", resultHandler)
+	http.HandleFunc("/404", handler404)
 	http.ListenAndServe(":8080", nil)
 }
