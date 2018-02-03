@@ -1,0 +1,33 @@
+<head>
+    <title>Post Page</title>
+
+</head>
+<body>
+
+<h1>Address Inference Demo</h1>
+
+<form action="/result" enctype="multipart/form-data" method="POST">
+    <div><label>
+        <textarea name="address_text" rows="20" cols="80"></textarea>
+    </label></div>
+    <div><input type="file" name="address_file" onchange="getFileContents(this.files)"></div>
+    <div><input type="submit" value="Save"></div>
+    <div id="file_info"></div>
+    <label for="file_content"></label><textarea id="file_content" rows="20" cols="80"></textarea>
+</form>
+
+<script>
+    function getFileContents(files) {
+        var file = files[0];
+        console.debug(file.name);
+        var fileInfo = document.getElementById("file_info");
+        fileInfo.innerHTML = "FileName: " + file.name + "\t" + "Size: " + file.size + "bytes\t" + "Type: " + file.type;
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+            var content = document.getElementById("file_content");
+            content.textContent = ev.target.result;
+        };
+        reader.readAsText(file);
+    }
+</script>
+</body>
