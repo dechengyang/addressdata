@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf ~/.cache/pip \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/ \
-    && mkdir -p /home/templates
+    && mkdir -p /home/statics
 
 COPY addressinfer /home
-COPY templates /home/templates
+COPY statics /home/statics
 
 EXPOSE 8080
 
