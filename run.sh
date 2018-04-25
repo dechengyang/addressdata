@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
+scp data/*.json allen@116.85.35.192:/home/allen/files
+
+scp data/*.csv allen@116.85.35.192:/home/allen/files
+
 go build main.go
 
-mv main addressinfer
-
-mv addressinfer docker/
-
-cp -r statics docker/
-
-cd docker/
-
-docker build --network host -t allenluo/address-infer:0.1 .
+docker build --network host -t lzy/addressdata:0.1 .
 
 rm addressinfer
 
 rm -rf statics
 
-docker run -ti --name address-infer -p 8080:8080 allenluo/address-infer:0.1
+docker run -d \
+    --name addressdata \
+    -p 8088:8088 \
+    -v /home/allen/files:/root/files
+    allenluo/addressdata:0.1
 
