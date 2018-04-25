@@ -52,4 +52,11 @@ func main() {
 	http.HandleFunc("/result", resultHandler)
 	http.HandleFunc("/404", handler404)
 	http.ListenAndServe(":8080", nil)
+	//parser := data.Parser{
+	//	Provinces: make([]data.Province, 34),
+	//	Cities:    make([]data.City, 400),
+	//	Districts: make([]data.District, 3000),
+	//	Towns:     make([]data.Town, 50000),
+	//}
+	//parser.Generate()
 }
