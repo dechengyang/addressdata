@@ -8,10 +8,6 @@ go build main.go
 
 docker build --network host -t lzy/addressdata:0.1 .
 
-rm addressinfer
-
-rm -rf statics
-
 docker run -d \
     --name addressdata \
     -p 8088:8088 \
